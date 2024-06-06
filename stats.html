@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toki Pona Quiz - Statistiken</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Toki Pona Quiz - Statistiken</h1>
+    </header>
+
+    <div class="container">
+        <div id="statsContainer">
+            <p id="accuracy">Genauigkeit: </p>
+            <p id="totalQuestions">Beantwortete Fragen: </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Toki Pona Quiz</p>
+    </footer>
+
+    <script>
+        let user = JSON.parse(localStorage.getItem('user'));
+        const statsContainer = document.getElementById('statsContainer');
+        const accuracyElement = document.getElementById('accuracy');
+        const totalQuestionsElement = document.getElementById('totalQuestions');
+
+        if (user) {
+            accuracyElement.textContent += `${(user.accuracy * 100).toFixed(2)}%`;
+            totalQuestionsElement.textContent += user.totalQuestions;
+        } else {
+            statsContainer.innerHTML = '<p>Es liegen keine Statistiken vor.</p>';
+        }
+    </script>
+</body>
+</html>

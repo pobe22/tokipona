@@ -1,0 +1,732 @@
+[
+  {
+    "word": "a",
+    "meaning": "Emotion, Betonung",
+    "example": "a! mi pilin pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "akesi",
+    "meaning": "Reptil, Amphibie",
+    "example": "akesi li lon tomo.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ala",
+    "meaning": "nein, nichts, null",
+    "example": "mi ala lukin e ona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "alasa",
+    "meaning": "jagen, sammeln",
+    "example": "mi alasa e moku.",
+    "group": "Verb"
+  },
+  {
+    "word": "ale",
+    "meaning": "alles, jeder, Leben, Universum",
+    "example": "mi wile e ale.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "anpa",
+    "meaning": "unten, Boden, niedrig",
+    "example": "mi lon anpa.",
+    "group": "Nomen"
+  },
+  {
+    "word": "ante",
+    "meaning": "anders, Veränderung",
+    "example": "ni li ante.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "anu",
+    "meaning": "oder",
+    "example": "sina moku anu lape?",
+    "group": "Konjunktion"
+  },
+  {
+    "word": "awen",
+    "meaning": "bleiben, warten, beharren",
+    "example": "mi awen.",
+    "group": "Verb"
+  },
+  {
+    "word": "e",
+    "meaning": "Objekt-Marker",
+    "example": "mi lukin e sina.",
+    "group": "Präposition"
+  },
+  {
+    "word": "en",
+    "meaning": "und",
+    "example": "mi en sina.",
+    "group": "Konjunktion"
+  },
+  {
+    "word": "esun",
+    "meaning": "Markt, Handel",
+    "example": "mi tawa esun.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ijo",
+    "meaning": "Ding, etwas",
+    "example": "ijo li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ike",
+    "meaning": "schlecht, negativ, komplex",
+    "example": "sina ike.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "ilo",
+    "meaning": "Werkzeug, Maschine",
+    "example": "ilo moku.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "insa",
+    "meaning": "innen, Inneres, Zentrum",
+    "example": "mi lon insa tomo.",
+    "group": "Nomen"
+  },
+  {
+    "word": "jaki",
+    "meaning": "dreckig, schmutzig, Müll",
+    "example": "tomo ni li jaki.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "jan",
+    "meaning": "Person, jemand, Mensch",
+    "example": "jan li tawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "jelo",
+    "meaning": "gelb",
+    "example": "kule jelo.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "jo",
+    "meaning": "haben, besitzen",
+    "example": "mi jo e moku.",
+    "group": "Verb"
+  },
+  {
+    "word": "kala",
+    "meaning": "Fisch, Meerestier",
+    "example": "kala li lon telo.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "kalama",
+    "meaning": "Klang, Geräusch",
+    "example": "mi kalama e kalama musi.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "kama",
+    "meaning": "kommen, werden, passieren",
+    "example": "mi kama.",
+    "group": "Verb"
+  },
+  {
+    "word": "kasi",
+    "meaning": "Pflanze, Blatt",
+    "example": "kasi li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ken",
+    "meaning": "können, möglich sein",
+    "example": "mi ken pali.",
+    "group": "Verb"
+  },
+  {
+    "word": "kepeken",
+    "meaning": "benutzen, mit",
+    "example": "mi kepeken ilo.",
+    "group": "Verb"
+  },
+  {
+    "word": "kili",
+    "meaning": "Frucht, Gemüse",
+    "example": "mi moku e kili.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "kiwen",
+    "meaning": "Stein, hartes Objekt",
+    "example": "kiwen li suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ko",
+    "meaning": "Pulver, Paste, weiche Substanz",
+    "example": "ko jaki."
+  },
+  {
+    "word": "kon",
+    "meaning": "Luft, Gas, Seele",
+    "example": "kon li pona."
+  },
+  {
+    "word": "kule",
+    "meaning": "Farbe",
+    "example": "kule loje.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "kulupu",
+    "meaning": "Gruppe, Gemeinschaft",
+    "example": "kulupu li lawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "kute",
+    "meaning": "hören, zuhören",
+    "example": "mi kute e kalama.",
+    "group": "Verb"
+  },
+  {
+    "word": "la",
+    "meaning": "(trennt Kontext von Aussage)",
+    "example": "mi wile moku la, mi tawa.",
+    "group": "Präposition"
+  },
+  {
+    "word": "lape",
+    "meaning": "schlafen, Ruhe",
+    "example": "mi lape.",
+    "group": "Verb"
+  },
+  {
+    "word": "laso",
+    "meaning": "blau, grün",
+    "example": "kule laso.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "lawa",
+    "meaning": "leiten, Kopf",
+    "example": "jan lawa.",
+    "group": "Verb"
+  },
+  {
+    "word": "len",
+    "meaning": "Kleidung, Stoff",
+    "example": "len li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "lete",
+    "meaning": "kalt, Eis",
+    "example": "telo lete.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "li",
+    "meaning": "(trennt Subjekt und Prädikat)",
+    "example": "jan li moku.",
+    "group": "Präposition"
+  },
+  {
+    "word": "lili",
+    "meaning": "klein, wenig",
+    "example": "mi lili.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "linja",
+    "meaning": "Faden, Haar",
+    "example": "linja lawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "lipu",
+    "meaning": "Papier, Dokument",
+    "example": "lipu ni.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "loje",
+    "meaning": "rot",
+    "example": "kule loje.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "lon",
+    "meaning": "in, auf, existieren",
+    "example": "mi lon tomo.",
+    "group": "Präposition"
+  },
+  {
+    "word": "luka",
+    "meaning": "Hand, Arm",
+    "example": "mi jo e luka.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "lukin",
+    "meaning": "sehen, schauen",
+    "example": "mi lukin e sina.",
+    "group": "Verb"
+  },
+  {
+    "word": "lupa",
+    "meaning": "Loch, Öffnung",
+    "example": "lupa tomo.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ma",
+    "meaning": "Land, Erde",
+    "example": "ma li suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mama",
+    "meaning": "Elternteil",
+    "example": "mama sina li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mani",
+    "meaning": "Geld, Reichtum",
+    "example": "mi jo e mani.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "meli",
+    "meaning": "Frau, weiblich",
+    "example": "meli li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mi",
+    "meaning": "ich, mein",
+    "example": "mi moku.",
+    "group": "Pronomen"
+  },
+  {
+    "word": "mije",
+    "meaning": "Mann, männlich",
+    "example": "mije li suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "moku",
+    "meaning": "essen, Nahrung",
+    "example": "mi moku e moku.",
+    "group": "Verb"
+  },
+  {
+    "word": "moli",
+    "meaning": "Tod, sterben",
+    "example": "jan li moli.",
+    "group": "Verb"
+  },
+  {
+    "word": "monsi",
+    "meaning": "Rücken, hinter",
+    "example": "mi lon monsi.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mu",
+    "meaning": "Tierlaut",
+    "example": "kijetesantakalu li mu.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mun",
+    "meaning": "Mond, Stern",
+    "example": "mun li suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "musi",
+    "meaning": "Spaß, Spiel",
+    "example": "mi musi.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "mute",
+    "meaning": "viel, viele",
+    "example": "jan mute.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "nanpa",
+    "meaning": "Zahl, Nummer",
+    "example": "jan nanpa wan.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "nasa",
+    "meaning": "verrückt, seltsam",
+    "example": "mi nasa.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "nasin",
+    "meaning": "Weg, Methode",
+    "example": "nasin ni li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "nena",
+    "meaning": "Hügel, Nase",
+    "example": "nena mije.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "ni",
+    "meaning": "dies, das",
+    "example": "tomo ni.",
+    "group": "Pronomen"
+  },
+  {
+    "word": "nimi",
+    "meaning": "Name, Wort",
+    "example": "nimi mi li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "noka",
+    "meaning": "Fuß, Bein",
+    "example": "mi jo e noka.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "o",
+    "meaning": "Anrede, Imperativ",
+    "example": "jan o, tawa!",
+    "group": "Partikel"
+  },
+  {
+    "word": "oko",
+    "meaning": "Auge",
+    "example": "mi lukin e oko.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "olin",
+    "meaning": "Liebe, lieben",
+    "example": "mi olin e sina.",
+    "group": "Verb"
+  },
+  {
+    "word": "ona",
+    "meaning": "er, sie, es, sein/ihr",
+    "example": "ona li tawa.",
+    "group": "Pronomen"
+  },
+  {
+    "word": "open",
+    "meaning": "öffnen, anfangen",
+    "example": "mi open e lupa.",
+    "group": "Verb"
+  },
+  {
+    "word": "pakala",
+    "meaning": "Fehler, kaputt, Schaden",
+    "example": "mi pakala e ilo.",
+    "group": "Verb"
+  },
+  {
+    "word": "pali",
+    "meaning": "machen, tun, Arbeit",
+    "example": "mi pali.",
+    "group": "Verb"
+  },
+  {
+    "word": "palisa",
+    "meaning": "Stab, Stock",
+    "example": "palisa suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "pan",
+    "meaning": "Getreide, Brot",
+    "example": "mi moku e pan.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "pana",
+    "meaning": "geben, senden",
+    "example": "mi pana e moku.",
+    "group": "Verb"
+  },
+  {
+    "word": "pi",
+    "meaning": "von, für (Besitzanzeige)",
+    "example": "kule pi tomo.",
+    "group": "Präposition"
+  },
+  {
+    "word": "pilin",
+    "meaning": "fühlen, Gefühl",
+    "example": "mi pilin pona.",
+    "group": "Verb"
+  },
+  {
+    "word": "pimeja",
+    "meaning": "schwarz, dunkel",
+    "example": "kule pimeja.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "pini",
+    "meaning": "Ende, beenden",
+    "example": "mi pini e pali.",
+    "group": "Verb"
+  },
+  {
+    "word": "pipi",
+    "meaning": "Insekt, Käfer",
+    "example": "pipi li tawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "po",
+    "meaning": "topologisch, von, her",
+    "example": "telo po nasin.",
+    "group": "Präposition"
+  },
+  {
+    "word": "poka",
+    "meaning": "neben, mit",
+    "example": "mi lon poka sina.",
+    "group": "Präposition"
+  },
+  {
+    "word": "poki",
+    "meaning": "Behälter, Box",
+    "example": "mi jo e poki.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "pona",
+    "meaning": "gut, einfach, positiv",
+    "example": "mi pona.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "sama",
+    "meaning": "gleich, ähnlich",
+    "example": "mi sama sina.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "seli",
+    "meaning": "Wärme, Feuer",
+    "example": "seli li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "selo",
+    "meaning": "Oberfläche, Haut",
+    "example": "selo li jaki.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "seme",
+    "meaning": "was, welches",
+    "example": "seme li pona?",
+    "group": "Pronomen"
+  },
+  {
+    "word": "sewi",
+    "meaning": "hoch, oben",
+    "example": "mi lon sewi.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "sijelo",
+    "meaning": "Körper, Gesundheit",
+    "example": "sijelo mi li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "sike",
+    "meaning": "Kreis, Kugel",
+    "example": "sike li tawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "sin",
+    "meaning": "neu, mehr",
+    "example": "mi wile sin e ni.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "sina",
+    "meaning": "du, dein",
+    "example": "sina pona.",
+    "group": "Pronomen"
+  },
+  {
+    "word": "sinpin",
+    "meaning": "Vorderseite, Gesicht",
+    "example": "sinpin mi.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "sitelen",
+    "meaning": "Bild, schreiben",
+    "example": "mi sitelen e toki.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "soko",
+    "meaning": "Pilz",
+    "example": "soko li kili.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "sona",
+    "meaning": "Wissen, können",
+    "example": "mi sona e ni.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "soweli",
+    "meaning": "Säugetier, Tier",
+    "example": "soweli li tawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "suli",
+    "meaning": "groß, wichtig",
+    "example": "tomo suli.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "suno",
+    "meaning": "Sonne, Licht",
+    "example": "suno li lon.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "supa",
+    "meaning": "Fläche, Möbel",
+    "example": "supa lape.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "suwi",
+    "meaning": "süß, Zucker",
+    "example": "mi moku e suwi.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "tan",
+    "meaning": "weil, Grund",
+    "example": "mi tawa tan ni.",
+    "group": "Präposition"
+  },
+  {
+    "word": "taso",
+    "meaning": "aber, nur",
+    "example": "mi wile, taso mi ken ala.",
+    "group": "Konjunktion"
+  },
+  {
+    "word": "tawa",
+    "meaning": "gehen, Bewegung",
+    "example": "mi tawa tomo.",
+    "group": "Verb"
+  },
+  {
+    "word": "telo",
+    "meaning": "Wasser, Flüssigkeit",
+    "example": "telo li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "tenpo",
+    "meaning": "Zeit, Moment",
+    "example": "tenpo suli.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "toki",
+    "meaning": "sprechen, Sprache",
+    "example": "mi toki e toki pona.",
+    "group": "Verb"
+  },
+  {
+    "word": "tomo",
+    "meaning": "Haus, Gebäude",
+    "example": "mi lon tomo.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "tu",
+    "meaning": "zwei",
+    "example": "mi jo e tu.",
+    "group": "Zahl"
+  },
+  {
+    "word": "unpa",
+    "meaning": "Sex, Fortpflanzung",
+    "example": "mi unpa.",
+    "group": "Verb"
+  },
+  {
+    "word": "uta",
+    "meaning": "Mund",
+    "example": "uta mi li pona.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "utala",
+    "meaning": "Kampf, Krieg",
+    "example": "mi utala.",
+    "group": "Verb"
+  },
+  {
+    "word": "walo",
+    "meaning": "weiß, hell",
+    "example": "kule walo.",
+    "group": "Adjektiv"
+  },
+  {
+    "word": "wan",
+    "meaning": "eins, vereinen",
+    "example": "mi wan.",
+    "group": "Zahl"
+  },
+  {
+    "word": "waso",
+    "meaning": "Vogel",
+    "example": "waso li tawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "wawa",
+    "meaning": "Energie, stark",
+    "example": "mi wawa.",
+    "group": "Substantiv"
+  },
+  {
+    "word": "weka",
+    "meaning": "weg, entfernen",
+    "example": "mi weka.",
+    "group": "Verb"
+  },
+  {
+    "word": "wile",
+    "meaning": "wollen, müssen",
+    "example": "mi wile e ni.",
+    "group": "Verb"
+  }
+]

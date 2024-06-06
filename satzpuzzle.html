@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Toki Pona Satz Puzzle</title>
+</head>
+
+<body onload="init()">
+    <header>
+        <h1>Toki Pona Satz Puzzle</h1>
+    </header>
+
+    <div class="container">
+        <div class="sentence"></div>
+        <div class="word-pool"></div>
+        <div class="user-input"></div>
+        <button onclick="checkAnswer()">Überprüfen</button>
+    </div>
+
+    <script>
+        let sentences = [];
+        const commonGermanWords = ['ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'sie', 'Sie', 'ist', 'sind', 'hat', 'haben', 'war', 'waren', 'hatte', 'hatten', 'wird', 'werden', 'bin', 'bist', 'bist', 'sind', 'sind', 'hatte', 'hast', 'hatten', 'haben', 'würde', 'würden', 'sein', 'sich', 'an', 'dass', 'in', 'mit', 'auf', 'für', 'über', 'nach', 'zu', 'vor', 'als', 'auch', 'wie', 'beim', 'aus', 'noch', 'nicht', 'aber', 'doch', 'ja', 'nein', 'vielleicht', 'hier', 'da', 'dort', 'dann', 'jetzt', 'heute', 'gestern', 'morgen'];
+
+        function init() {
+            fetch('beispielsaetze.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('JSON-Daten erfolgreich geladen:', data);
+                    sentences = data;
+                    loadSentence();
+                })
+                .catch(error => {
+                    console.error('Fehler beim Laden der Sätze:', error);
+                    alert('Es gab einen Fehler beim Laden der Sätze. Bitte überprüfe die Konsole für weitere Details.');
+                });
+        }
+
+        function loadSentence() {
+            const sentenceElement = document.querySelector('.sentence');
+            const wordPoolElement = document.querySelector('.word-pool');
+            const userInputElement = document.querySelector('.user-input');
+
+            if (sentences.length === 0) {
+                console.error('Das Array "sentences" ist leer oder nicht initialisiert.');
+                return;
+            }
+
+            const currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+            console.log('Aktueller Satz:', currentSentence);
+            const tokiPonaWords = currentSentence.sentence.split(' ');
+            const germanWords = currentSentence.german.split(' ');
+
+            console.log('Toki Pona Wörter:', tokiPonaWords);
+            console.log('Deutsche Wörter:', germanWords);
+
+            sentenceElement.textContent = currentSentence.sentence;
+
+            // Erstelle Eingabefelder basierend auf der Anzahl der Toki Pona Wörter
+            tokiPonaWords.forEach(word => {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('data-word', word);
+                input.addEventListener('drop', drop);
+                input.addEventListener('dragover', dragOver);
+                userInputElement.appendChild(input);
+            });
+
+            // Erstelle Schaltflächen für alle deutschen Wörter
+            const allGermanWords = [...germanWords, ...getRandomGermanWords(5 - tokiPonaWords.length)];
+            const shuffledWords = shuffleArray(allGermanWords);
+
+            shuffledWords.forEach(word => {
+                const button = document.createElement('button');
+                button.textContent = word;
+                button.draggable = true;
+                button.addEventListener('dragstart', dragStart);
+                wordPoolElement.appendChild(button);
+            });
+        }
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function getRandomGermanWords(count) {
+            const shuffledCommonWords = shuffleArray(commonGermanWords.slice());
+            return shuffledCommonWords.slice(0, count);
+        }
+
+        function dragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.textContent);
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData('text/plain');
+            const input = event.target;
+            input.value = data;
+        }
+
+        function checkAnswer() {
+            const userInputs = document.querySelectorAll('.user-input input');
+            const tokiPonaWords = Array.from(userInputs).map(input => input.getAttribute('data-word'));
+            const userInput = tokiPonaWords.join(' ');
+            const correctSentence = document.querySelector('.sentence').textContent;
+
+            if (userInput === correctSentence) {
+                alert('Richtig!');
+            } else {
+                alert('Leider falsch. Versuche es erneut!');
+            }
+        }
+    </script>
+</body>
+
+</html>

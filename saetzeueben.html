@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Toki Pona Quiz</title>
+</head>
+
+<body>
+    <header>
+        <h1>Toki Pona Quiz</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Startseite</a></li>
+            <li><a href="stats.html">Stats</a></li>
+            <li><a href="#" id="loginLink">Anmelden</a></li>
+            <li><a href="#" id="logoutLink" style="display: none;">Abmelden</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="question"></div>
+        <div class="options"></div>
+        <div class="feedback" style="display: none;"></div>
+        <button class="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Anmelden</h2>
+            <form id="loginForm">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username" required>
+                <button type="submit">Anmelden</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Toki Pona Quiz</p>
+    </footer>
+
+
+    <script>
+        let sentences = [];
+        let currentQuestion = 0;
+
+        fetch('beispielsaetze.json')
+            .then(response => response.json())
+            .then(data => {
+                sentences = data;
+                loadQuestion();
+            })
+            .catch(error => console.error('Fehler beim Laden der Beispielsätze:', error));
+
+        const loginLink = document.getElementById('loginLink');
+        const logoutLink = document.getElementById('logoutLink');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+
+        loginLink.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        logoutLink.addEventListener('click', () => {
+            user = null;
+            logoutLink.style.display = 'none';
+            loginLink.style.display = 'inline';
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            if (username.trim() !== '') {
+                user = { username, accuracy: 0, totalQuestions: 0 };
+                loginModal.style.display = 'none';
+                loginLink.style.display = 'none';
+                logoutLink.style.display = 'inline';
+            } else {
+                alert('Bitte gib einen Benutzernamen ein.');
+            }
+        });
+
+        function loadQuestion() {
+            if (sentences.length === 0) {
+                console.error('Die Beispielsatzliste ist leer');
+                return;
+            }
+
+            const questionElement = document.querySelector('.question');
+            const optionsElement = document.querySelector('.options');
+            const feedbackElement = document.querySelector('.feedback');
+            const sentence = getRandomSentence();
+
+            questionElement.textContent = `Was bedeutet "${sentence.sentence}"?`;
+
+            optionsElement.innerHTML = '';
+            const correctOption = createButton(sentence.german, true);
+            optionsElement.appendChild(correctOption);
+
+            const incorrectOptions = getRandomIncorrectOptions(sentence.german);
+            incorrectOptions.forEach(option => {
+                const button = createButton(option, false);
+                optionsElement.appendChild(button);
+            });
+
+            feedbackElement.style.display = 'none';
+        }
+
+        function createButton(text, isCorrect) {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.classList.add(isCorrect ? 'correct' : 'incorrect');
+            button.addEventListener('click', checkAnswer);
+            return button;
+        }
+
+        function getRandomSentence() {
+            return sentences[Math.floor(Math.random() * sentences.length)];
+        }
+
+        function getRandomIncorrectOptions(correctOption) {
+            const incorrectOptions = sentences
+                .filter(sentence => sentence.german !== correctOption)
+                .map(sentence => sentence.german)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 2);
+            return incorrectOptions;
+        }
+
+        function checkAnswer(event) {
+            const selectedOption = event.target.textContent;
+            const correctOption = document.querySelector('.correct').textContent;
+            const feedbackElement = document.querySelector('.feedback');
+
+            if (selectedOption === correctOption) {
+                feedbackElement.textContent = 'Richtig!';
+                feedbackElement.style.color = 'green';
+                if (user) {
+                    user.accuracy = (user.accuracy * user.totalQuestions + 1) / (user.totalQuestions + 1);
+                    user.totalQuestions++;
+                }
+            } else {
+                feedbackElement.textContent = `Leider falsch. Die richtige Antwort ist: ${correctOption}`;
+                feedbackElement.style.color = 'red';
+                if (user) {
+                    user.accuracy = (user.accuracy * user.totalQuestions) / (user.totalQuestions + 1);
+                    user.totalQuestions++;
+                }
+            }
+
+            feedbackElement.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % sentences.length;
+            loadQuestion();
+        }
+    </script>
+</body>
+
+</html>

@@ -47,16 +47,16 @@
 
 
     <script>
-        let sentences = [];
+        let vocab = [];
         let currentQuestion = 0;
 
-        fetch('beispielsaetze.json')
+        fetch('./JSON/vokabeln.json')
             .then(response => response.json())
             .then(data => {
-                sentences = data;
+                vocab = data;
                 loadQuestion();
             })
-            .catch(error => console.error('Fehler beim Laden der Beispielsätze:', error));
+            .catch(error => console.error('Fehler beim Laden der Vokabeln:', error));
 
         const loginLink = document.getElementById('loginLink');
         const logoutLink = document.getElementById('logoutLink');
@@ -87,23 +87,23 @@
         });
 
         function loadQuestion() {
-            if (sentences.length === 0) {
-                console.error('Die Beispielsatzliste ist leer');
+            if (vocab.length === 0) {
+                console.error('Die Vokabelliste ist leer');
                 return;
             }
 
             const questionElement = document.querySelector('.question');
             const optionsElement = document.querySelector('.options');
             const feedbackElement = document.querySelector('.feedback');
-            const sentence = getRandomSentence();
+            const vocabItem = getRandomQuestion();
 
-            questionElement.textContent = `Was bedeutet "${sentence.sentence}"?`;
+            questionElement.textContent = `Was bedeutet "${vocabItem.word}"?`;
 
             optionsElement.innerHTML = '';
-            const correctOption = createButton(sentence.german, true);
+            const correctOption = createButton(vocabItem.meaning, true);
             optionsElement.appendChild(correctOption);
 
-            const incorrectOptions = getRandomIncorrectOptions(sentence.german);
+            const incorrectOptions = getRandomIncorrectOptions(vocabItem.meaning);
             incorrectOptions.forEach(option => {
                 const button = createButton(option, false);
                 optionsElement.appendChild(button);
@@ -120,20 +120,20 @@
             return button;
         }
 
-        function getRandomSentence() {
-            return sentences[Math.floor(Math.random() * sentences.length)];
+        function getRandomQuestion() {
+            return vocab[Math.floor(Math.random() * vocab.length)];
         }
 
         function getRandomIncorrectOptions(correctOption) {
-            const incorrectOptions = sentences
-                .filter(sentence => sentence.german !== correctOption)
-                .map(sentence => sentence.german)
+            const incorrectOptions = vocab
+                .filter(item => item.meaning !== correctOption)
+                .map(item => item.meaning)
                 .sort(() => Math.random() - 0.5)
-                .slice(0, 2);
+                .slice(0, 3);
             return incorrectOptions;
         }
 
-        function checkAnswer(event) {
+         function checkAnswer(event) {
             const selectedOption = event.target.textContent;
             const correctOption = document.querySelector('.correct').textContent;
             const feedbackElement = document.querySelector('.feedback');
@@ -157,8 +157,9 @@
             feedbackElement.style.display = 'block';
         }
 
+
         function nextQuestion() {
-            currentQuestion = (currentQuestion + 1) % sentences.length;
+            currentQuestion = (currentQuestion + 1) % vocab.length;
             loadQuestion();
         }
     </script>

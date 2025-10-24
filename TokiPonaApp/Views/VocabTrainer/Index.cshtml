@@ -1,0 +1,52 @@
+@model TokiPonaQuiz.ViewModels.QuizViewModel
+
+@{
+    ViewData["Title"] = "Toki Pona Vokabeltrainer";
+}
+
+<header>
+    <h1>Toki Pona Quiz</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a asp-controller="Home" asp-action="Index">Startseite</a></li>
+        <li><a asp-controller="Stats" asp-action="Index">Stats</a></li>
+        @if (Model.IsLoggedIn)
+        {
+        <li><span>Willkommen, @Model.Username</span></li>
+        <li><a href="#" id="logoutLink">Abmelden</a></li>
+        }
+        else
+        {
+        <li><a href="#" id="loginLink">Anmelden</a></li>
+        }
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="question"></div>
+    <div class="options"></div>
+    <div class="feedback" style="display: none;"></div>
+    <button class="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Anmelden</h2>
+        <form id="loginForm">
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Anmelden</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Toki Pona Quiz</p>
+</footer>
+
+@section Scripts {
+    <script src="~/js/vocabtrainer.js"></script>
+}

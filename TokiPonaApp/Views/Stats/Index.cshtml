@@ -1,0 +1,29 @@
+@model TokiPonaQuiz.Models.UserStats
+
+@{
+    ViewData["Title"] = "Statistiken";
+}
+
+<header>
+    <h1>Toki Pona Quiz - Statistiken</h1>
+</header>
+
+<div class="container">
+    <div id="statsContainer">
+        @if (Model.Username != null)
+        {
+        <h2>Benutzer: @Model.Username</h2>
+        <p><strong>Genauigkeit:</strong> @((Model.Accuracy * 100).ToString("F2"))%</p>
+        <p><strong>Beantwortete Fragen:</strong> @Model.TotalQuestions</p>
+        <p><strong>Richtige Antworten:</strong> @Model.CorrectAnswers</p>
+        }
+        else
+        {
+        <p>Es liegen keine Statistiken vor. Bitte melden Sie sich an.</p>
+        }
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Toki Pona Quiz</p>
+</footer>

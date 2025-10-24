@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Toki Pona Satz Puzzle";
+}
+
+<header>
+    <h1>Toki Pona Satz Puzzle</h1>
+</header>
+
+<div class="container">
+    <div class="sentence"></div>
+    <div class="word-pool"></div>
+    <div class="user-input"></div>
+    <button onclick="checkAnswer()">Überprüfen</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 Toki Pona Quiz</p>
+</footer>
+
+@section Scripts {
+    <script src="~/js/sentencepuzzle.js"></script>
+}

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TokiPonaQuiz.Models;
 using System.Text.Json;
+using TokiPonaQuiz.ViewModels;
 
 namespace TokiPonaQuiz.Controllers
 {

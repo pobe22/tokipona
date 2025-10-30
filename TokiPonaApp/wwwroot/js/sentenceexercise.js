@@ -267,3 +267,26 @@ function resetAnswerDisplay() {
     const display = document.getElementById('answerDisplay');
     display.innerHTML = '<span class="placeholder">Ziehe Wörter hierher oder tippe deine Antwort ein...</span>';
 }
+
+// Beispiel: Benutzer-Auswahl im Frontend
+async function loadSentence(difficulty, forceNew = false) {
+    const response = await fetch(
+        `/SentenceExercise/GenerateSentence?difficulty=${difficulty}&forceNew=${forceNew}`
+    );
+    const data = await response.json();
+
+    console.log(`Source: ${data.source}, Tokens used: ${data.tokensUsed}`);
+
+    if (data.source === 'database') {
+        showInfo('♻️ Bestehender Satz wiederverwendet - keine Kosten!');
+    } else {
+        showWarning(`⚠️ Neuer Satz generiert - ${data.tokensUsed} Tokens verbraucht`);
+    }
+
+    displaySentence(data.sentence);
+}
+
+// Button-Handler
+document.getElementById('btnNewSentence').onclick = () => loadSentence('beginner', true);
+document.getElementById('btnExistingSentence').onclick = () => loadSentence('beginner', false);
+

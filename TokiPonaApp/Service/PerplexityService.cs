@@ -10,10 +10,15 @@ namespace TokiPonaQuiz.Services
         private readonly string _apiKey;
         private const string BaseUrl = "https://api.perplexity.ai";
 
-        public PerplexityService(IConfiguration configuration)
+        // Token-Tracking
+        private int _totalTokensUsed = 0;
+        private readonly ILogger<PerplexityService> _logger;
+
+        public PerplexityService(IConfiguration configuration, ILogger<PerplexityService> logger)
         {
             _httpClient = new HttpClient();
             _apiKey = configuration["PerplexityAPI:ApiKey"];
+            _logger = logger;
 
             _httpClient.BaseAddress = new Uri(BaseUrl);
             _httpClient.DefaultRequestHeaders.Authorization =
@@ -22,133 +27,168 @@ namespace TokiPonaQuiz.Services
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<string> GenerateTokiPonaSentence(string difficulty = "beginner")
+        public async Task<string> GenerateTokiPonaSentence(string difficulty = "beginner", bool requireConfirmation = true)
         {
+            int estimatedTokens = 35; 
+
+            if (requireConfirmation && !await ConfirmTokenUsage("GenerateSentence", estimatedTokens))
+                return string.Empty;
+
             var requestBody = new
             {
-                model = "sonar-pro",
+                model = "sonar", 
                 messages = new[]
                 {
                     new
                     {
-                        role = "system",
-                        content = "You are a Toki Pona language expert. Generate only valid Toki Pona sentences."
-                    },
-                    new
-                    {
                         role = "user",
-                        content = $"Generate one simple {difficulty}-level Toki Pona sentence. Return only the sentence, no explanations."
+                        content = $"Toki Pona {difficulty} sentence:" 
                     }
                 },
                 temperature = 0.7,
-                max_tokens = 50
+                max_tokens = 20 
             };
 
-            var response = await _httpClient.PostAsJsonAsync("/chat/completions", requestBody);
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadFromJsonAsync<PerplexityResponse>();
-            return result?.Choices[0]?.Message?.Content?.Trim() ?? string.Empty;
+            return await ExecuteRequest(requestBody, "generate");
         }
 
-        public async Task<TranslationResult> TranslateSentence(string tokiPonaSentence)
+        public async Task<TranslationResult> TranslateSentence(string tokiPonaSentence, bool requireConfirmation = true)
         {
+            int estimatedTokens = 50;
+
+            if (requireConfirmation && !await ConfirmTokenUsage("Translate", estimatedTokens))
+                return new TranslationResult { TokiPonaSentence = tokiPonaSentence, GermanTranslation = "" };
+
             var requestBody = new
             {
-                model = "sonar-pro",
+                model = "sonar", 
                 messages = new[]
                 {
                     new
                     {
-                        role = "system",
-                        content = "You are a Toki Pona translator. Translate accurately to German."
-                    },
-                    new
-                    {
                         role = "user",
-                        content = $"Translate this Toki Pona sentence to German: '{tokiPonaSentence}'. Return only the German translation."
+                        content = $"'{tokiPonaSentence}' -> German:" 
                     }
                 },
-                temperature = 0.3,
-                max_tokens = 100
+                temperature = 0.2, 
+                max_tokens = 30 
             };
 
-            var response = await _httpClient.PostAsJsonAsync("/chat/completions", requestBody);
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadFromJsonAsync<PerplexityResponse>();
+            var translation = await ExecuteRequest(requestBody, "translate");
             return new TranslationResult
             {
                 TokiPonaSentence = tokiPonaSentence,
-                GermanTranslation = result?.Choices[0]?.Message?.Content?.Trim() ?? string.Empty
+                GermanTranslation = translation
             };
         }
 
-        public async Task<ValidationResult> ValidateSentence(string userAnswer, string correctAnswer)
+        // OPTIMIERT: Einfaches Ja/Nein statt Erklärungen
+        public async Task<ValidationResult> ValidateSentence(string userAnswer, string correctAnswer, bool requireConfirmation = true)
         {
+            int estimatedTokens = 60;
+
+            if (requireConfirmation && !await ConfirmTokenUsage("Validate", estimatedTokens))
+                return new ValidationResult { IsCorrect = false, Feedback = "Cancelled" };
+
             var requestBody = new
             {
-                model = "sonar-reasoning-pro",
+                model = "sonar", 
                 messages = new[]
                 {
                     new
                     {
-                        role = "system",
-                        content = "You are a Toki Pona language validator. Compare two sentences and determine if they are semantically equivalent."
-                    },
-                    new
-                    {
                         role = "user",
-                        content = $"Compare these sentences:\nUser: '{userAnswer}'\nCorrect: '{correctAnswer}'\n\nRespond with only 'CORRECT' or 'INCORRECT' followed by a brief explanation."
+                        content = $"Same meaning?\n1: '{userAnswer}'\n2: '{correctAnswer}'\nAnswer: YES/NO"
                     }
                 },
                 temperature = 0.1,
-                max_tokens = 150
+                max_tokens = 10
             };
 
-            var response = await _httpClient.PostAsJsonAsync("/chat/completions", requestBody);
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadFromJsonAsync<PerplexityResponse>();
-            var content = result?.Choices[0]?.Message?.Content ?? string.Empty;
+            var result = await ExecuteRequest(requestBody, "validate");
 
             return new ValidationResult
             {
-                IsCorrect = content.StartsWith("CORRECT", StringComparison.OrdinalIgnoreCase),
-                Feedback = content
+                IsCorrect = result.Contains("YES", StringComparison.OrdinalIgnoreCase),
+                Feedback = result.Trim()
             };
         }
 
-        public async Task<List<string>> GenerateWordPool(string tokiPonaSentence, int poolSize = 10)
+        public async Task<List<string>> GenerateWordPool(string tokiPonaSentence, int poolSize = 10, bool requireConfirmation = true)
         {
+            int estimatedTokens = 45;
+
+            if (requireConfirmation && !await ConfirmTokenUsage("WordPool", estimatedTokens))
+                return new List<string>();
+
             var requestBody = new
             {
-                model = "sonar-pro",
+                model = "sonar",
                 messages = new[]
                 {
                     new
                     {
                         role = "user",
-                        content = $"Given this Toki Pona sentence: '{tokiPonaSentence}', generate {poolSize} Toki Pona words including the words from the sentence plus some distractors. Return as comma-separated list."
+                        content = $"{poolSize} Toki Pona words for: '{tokiPonaSentence}'\nFormat: word1,word2,word3"
                     }
                 },
                 temperature = 0.5,
-                max_tokens = 100
+                max_tokens = 40 
             };
 
-            var response = await _httpClient.PostAsJsonAsync("/chat/completions", requestBody);
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadFromJsonAsync<PerplexityResponse>();
-            var words = result?.Choices[0]?.Message?.Content?.Split(',')
+            var response = await ExecuteRequest(requestBody, "wordpool");
+            return response?.Split(',')
                 .Select(w => w.Trim())
+                .Where(w => !string.IsNullOrEmpty(w))
+                .Take(poolSize)
                 .ToList() ?? new List<string>();
-
-            return words;
         }
+
+        // NEU: Bestätigungsmechanismus
+        private async Task<bool> ConfirmTokenUsage(string operation, int estimatedTokens)
+        {
+            _logger.LogWarning($"⚠️ Operation '{operation}' will use ~{estimatedTokens} tokens. Total used: {_totalTokensUsed}");
+
+            // In Produktion: Hier UI-Bestätigung einbauen oder Budget-Check
+            // Für jetzt: Automatisch erlauben, aber loggen
+            return true;
+        }
+
+        // NEU: Zentrale Request-Ausführung mit Token-Tracking
+        private async Task<string> ExecuteRequest(object requestBody, string operation)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("/chat/completions", requestBody);
+                response.EnsureSuccessStatusCode();
+
+                var result = await response.Content.ReadFromJsonAsync<PerplexityResponse>();
+                var content = result?.Choices[0]?.Message?.Content?.Trim() ?? string.Empty;
+
+                // Token-Usage aus Response-Headers extrahieren (falls verfügbar)
+                if (response.Headers.TryGetValues("x-tokens-used", out var tokenValues))
+                {
+                    if (int.TryParse(tokenValues.FirstOrDefault(), out int tokensUsed))
+                    {
+                        _totalTokensUsed += tokensUsed;
+                        _logger.LogInformation($"✓ {operation}: {tokensUsed} tokens used. Total: {_totalTokensUsed}");
+                    }
+                }
+
+                return content;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"❌ {operation} failed: {ex.Message}");
+                throw;
+            }
+        }
+
+        // NEU: Token-Statistik abrufen
+        public int GetTotalTokensUsed() => _totalTokensUsed;
     }
 
-    // Response Models
+    // Response Models (unverändert)
     public class PerplexityResponse
     {
         [JsonPropertyName("choices")]

@@ -50,9 +50,4 @@ namespace TokiPonaQuiz.Controllers
             // Logic to update user statistics in database or session
         }
     }
-
-    public class AnswerSubmission
-    {
-        public bool IsCorrect { get; set; }
-    }
 }

@@ -14,23 +14,104 @@
         <li><a asp-controller="Stats" asp-action="Index">Stats</a></li>
         @if (Model.IsLoggedIn)
         {
-        <li><span>Willkommen, @Model.Username</span></li>
-        <li><a href="#" id="logoutLink">Abmelden</a></li>
+            <li><span>Willkommen, @Model.Username</span></li>
+            <li><a href="#" id="logoutLink">Abmelden</a></li>
         }
         else
         {
-        <li><a href="#" id="loginLink">Anmelden</a></li>
+            <li><a href="#" id="loginLink">Anmelden</a></li>
         }
     </ul>
 </nav>
 
 <div class="container">
-    <div class="question"></div>
-    <div class="options"></div>
-    <div class="feedback" style="display: none;"></div>
-    <button class="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+    <!-- Schwierigkeitsstufe wählen -->
+    <div class="difficulty-selector">
+        <label for="difficulty">Schwierigkeitsstufe:</label>
+        <select id="difficulty">
+            <option value="beginner">Anfänger</option>
+            <option value="intermediate">Fortgeschritten</option>
+            <option value="advanced">Experte</option>
+        </select>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generiere neue Frage mit Perplexity AI...</p>
+    </div>
+
+    <!-- Quiz Container -->
+    <div id="quizContainer" class="quiz-container">
+        <!-- Frage -->
+        <div class="question-section">
+            <h2>Übersetze folgenden deutschen Satz ins Toki Pona:</h2>
+            <div class="question-text" id="questionText"></div>
+            <div class="correct-answer" id="correctAnswer" style="display: none;"></div>
+        </div>
+
+        <!-- Antwort-Bereich mit Drag & Drop -->
+        <div class="answer-section">
+            <h3>Deine Antwort:</h3>
+            <div class="answer-dropzone" id="answerDropzone">
+                <div class="answer-display" id="answerDisplay">
+                    <span class="placeholder">Ziehe Wörter hierher oder tippe deine Antwort ein...</span>
+                </div>
+            </div>
+
+            <!-- Alternative: Direkteingabe -->
+            <div class="input-section">
+                <input type="text" id="manualInput" placeholder="Oder tippe deine Antwort direkt ein..." />
+            </div>
+        </div>
+
+        <!-- Word Pool -->
+        <div class="word-pool-section">
+            <h3>Verfügbare Wörter:</h3>
+            <div class="word-pool" id="wordPool"></div>
+        </div>
+
+        <!-- Aktionsbuttons -->
+        <div class="action-buttons">
+            <button class="btn btn-primary" id="checkBtn" onclick="checkAnswer()">
+                Antwort überprüfen
+            </button>
+            <button class="btn btn-secondary" id="hintBtn" onclick="showHint()">
+                Hinweis
+            </button>
+            <button class="btn btn-success" id="nextBtn" onclick="nextQuestion()" style="display: none;">
+                Nächste Frage
+            </button>
+        </div>
+
+        <!-- Feedback Bereich -->
+        <div class="feedback" id="feedbackSection" style="display: none;">
+            <div class="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div class="feedback-message" id="feedbackMessage"></div>
+                <div class="ai-explanation" id="aiExplanation"></div>
+            </div>
+        </div>
+
+        <!-- Statistiken -->
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Richtig:</span>
+                <span class="stat-value" id="correctCount">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Falsch:</span>
+                <span class="stat-value" id="incorrectCount">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Streak:</span>
+                <span class="stat-value" id="streakCount">0</span>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- Login Modal -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -44,7 +125,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2025 Toki Pona Quiz</p>
+    <p>&copy; 2025 Toki Pona Quiz | Powered by Perplexity AI</p>
 </footer>
 
 @section Scripts {

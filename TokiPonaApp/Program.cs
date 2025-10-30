@@ -1,3 +1,5 @@
+using TokiPonaQuiz.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -7,6 +9,9 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddSingleton<PerplexityService>();
+
 
 var app = builder.Build();
 
